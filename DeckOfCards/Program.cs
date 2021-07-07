@@ -7,6 +7,8 @@ namespace DeckOfCards
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Deck of Cards Problems!!!");
+            CardDeck cd = new CardDeck();
+            cd.DistributeCards();
         }
     }
 }
