@@ -6,30 +6,26 @@ namespace DeckOfCards
 {
     class CardDeck
     {
+        /// <summary>
+        /// Initializing suit array and rank array
+        /// </summary>
         string[] cardSuit = new string[] { "Clubs", "Diamond", "Heart", "Spade" };
         string[] cardRank = new string[] {"2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"};
         List<string> checkCard = new List<string>();
         
         public void DistributeCards()
         {
-            string[,] cardDeck = new string[cardSuit.Length, cardRank.Length];
-            string[,] checkCardDeck = new string[cardSuit.Length, cardRank.Length];
+            
+           string[,] cardDeck = new string[cardSuit.Length, cardRank.Length];
 
-            for (int i = 0; i < cardSuit.Length; i++)
+           for (int i = 0; i < cardSuit.Length; i++)
             {
                 for (int j = 0; j < cardRank.Length; j++)
                 {
                     cardDeck[i, j] = $"{cardRank[j]} of {cardSuit[i]}";
                 }
             }
-            for (int i = 0; i < cardSuit.Length; i++)
-            {
-                for (int j = 0; j < cardRank.Length; j++)
-                {
-                    Console.Write($"{cardDeck[i,j]} , ");
-                }
-                Console.WriteLine("\n****************");
-            }
+            PrintDeck(cardDeck);
 
             Dictionary<string, HashSet<string>> players = new Dictionary<string, HashSet<string>>();
 
@@ -49,21 +45,36 @@ namespace DeckOfCards
                         checkCard.Add(cardDeck[randomSuit, randomRank]);
                     }
                 }
-                players.Add($"Player{k++}", playerCard);
+                players.Add($"Player {k++}", playerCard);
 
                 
             }
             Console.WriteLine($"*********{checkCard.Count}*******");
+            PrintPlayerCards(players);
+        }
 
-            foreach(KeyValuePair<string,HashSet<string>> i in players)
+        public void PrintPlayerCards(Dictionary<string, HashSet<string>> players)
+        {
+            foreach (KeyValuePair<string, HashSet<string>> i in players)
             {
                 Console.WriteLine($"*********\n{i.Key} has\n***********");
-                foreach(string j in i.Value)
+                foreach (string j in i.Value)
                 {
                     Console.WriteLine(j);
                 }
             }
+        }
 
+        public void PrintDeck(string[,] cardDeck)
+        {
+            for (int i = 0; i < cardSuit.Length; i++)
+            {
+                for (int j = 0; j < cardRank.Length; j++)
+                {
+                    Console.Write($"{cardDeck[i, j]} , ");
+                }
+                Console.WriteLine("\n****************");
+            }
         }
 
     }
